@@ -17,11 +17,17 @@ def read_lines(filename):
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         filename=sys.argv[1] 
-        output=f"seg_{filename}"
+        basefile=os.path.basename(filename )
+        name,ext=os.path.splitext(basefile)
+
+        output=f"seg_{name}_dd{ext}"
+        exit
         lines= read_lines(filename)
         ofh=open(output, "w" )
         for line in lines:
             ofh.write(line)
         ofh.close()
         print(f"Please see {output} file with lines with segments" )
-
+    else:
+        print(f"""{sys.argv[0]} program takes a file with HL7 message. 
+Splits the HL7 messages by segments. It will write to new file""")
